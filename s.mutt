@@ -1,0 +1,70 @@
+# example.mutt
+#
+# (C) EN 2025 - THIS CODE IS UNDER THE MIT LICENSE
+#
+# created for the mutt programming language
+# unfortunatly mutt currently only
+# supports tabs which are kind of ugly
+# i plan to implement spaces
+# later.
+# 
+# i would also like to have a version of mutt
+# which allows you to put functions in objects
+# but it needs to somehow be compatible with c.
+# (maybe pointers to the functions.)
+
+import stdio.h
+
+var hello: const char* = "says hi"
+
+# say hello!
+@export
+func say_hi(name: const char*) -> void:
+	printf("%s%s", name, hello)
+
+# a struct with NO typedef
+@typeless
+@export
+struct example_object:
+	var item: int
+
+# an enum, typeless (no typedef)
+@typeless
+@export
+enum weather:
+	clear,
+	rainy,
+	foggy: 2,
+	overcast
+
+const thing: int = 0
+var mutable_thing: int = 1
+
+# the main function
+func main() -> int:
+	switch 'a':
+		case 'a':
+			printf("switches are kind of ugly");
+			break
+		case 'b':
+			break
+		# this is like default: in c
+		case:
+			break
+	
+	# probably the ugliest code in mutt
+	for var index: int = 0 do index++ while index<10:
+		printf("index %i \n", index)
+
+	if not true and false or true:	
+		printf("unreachable?")
+	
+	# creating an struct
+	var thing_2: struct example_object
+	thing_2.item = 0
+
+	# calling some functions
+	printf("hello mutt")
+	say_hi("fred")
+
+	return 0
