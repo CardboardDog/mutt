@@ -11,6 +11,9 @@ if stuff ":":
 while stuff ":":
 	
 elif thing ":":
+
+else:
+
 	
 func hey(arg1:int, arg2:int) -> void:
 	return

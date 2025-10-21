@@ -93,6 +93,19 @@ def get_stmnt(src,cursor):
         print("if statement unfinished")
     return p_cursor
 
+def block_line(src,cursor):
+    p_cursor = cursor
+    while(p_cursor<len(src)): 
+        char = src[p_cursor]
+        if(char == "\n"):
+            return True
+        elif(is_notspace(char)):
+            return False
+        p_cursor += 1
+    # TODO: handle error
+    print("expected line after statement or function")
+    return False
+
 # begin compilation
 while(cursor<len(m_src)):
     # this is string thing
@@ -114,7 +127,14 @@ while(cursor<len(m_src)):
             close_if = get_stmnt(m_src,cursor)
             m_src = set_at(m_src,")",close_if)
             m_src = insert_at(m_src,"{",close_if+1)
-            cusor = close_if+1
+            cursor = close_if+1
+        elif word == "else":
+            cursor = finish
+            # TODO: handle possible errors
+            close_if = get_stmnt(m_src,cursor)
+            m_src = chop_at(m_src,close_if,close_if+1)
+            # since we cut a letter out the cursor is now ahead by one 
+            m_src = insert_at(m_src,"{",close_if)
         elif word == "func":
             # TODO: clean some of this up and offload it to another functions
             cursor = start
@@ -184,6 +204,7 @@ while(cursor<len(m_src)):
                 # TODO: you know the drill
                 print("function never ended are you missing an \":\"")
                 #return
+            # end of awful code
             f_end = p_cursor
             o_sz = len(m_src)
             m_src = chop_at(m_src,p_end+1,f_end)
@@ -192,7 +213,13 @@ while(cursor<len(m_src)):
             m_src = insert_at(m_src,f"({c_args})",p_start)
             m_src = insert_at(m_src,return_type,cursor)
             delta_sz = len(m_src)-o_sz
-            cursor = p_end+delta_sz
+            cursor = f_end+delta_sz
+            if(not block_line(m_src,cursor)):
+                print("please do not place code on the same line as the function")
+                print("sic em' mutt!")
+                # refuse to compile the code
+                sys.exit(-1)
+                
     cursor += 1
 m_src = mutt_mcr+m_src
 
