@@ -4,7 +4,7 @@
 #
 # edit: i'll probably end up keeping this
 # so get used to this un-modular,
-# poorley commented, ugly lump of code.
+# poorly commented, ugly lump of code.
 # plus it's full of crypticly named vars.
 # enjoy.
 
