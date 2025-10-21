@@ -5,7 +5,7 @@
 # edit: i'll probably end up keeping this
 # so get used to this un-modular,
 # poorly commented, ugly lump of code.
-# plus it's full of crypticly named vars.
+# plus it's full of cryptically named vars.
 # enjoy.
 
 import sys
