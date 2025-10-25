@@ -20,3 +20,28 @@ func hey(arg1:int, arg2:int) -> void:
 
 func num2() -> int:
 	return 3
+
+switch thing:
+	case other_thing:
+
+	case nothing:
+		while a:
+			dothing()
+	default:
+
+
+var nothing:char* = d
+
+const thingx:type type type
+
+var thing2:type type type = s
+
+var multiline_thing:type = ("
+	hey "
+	data
+	"
+	"
+	)
+
+if a:
+	pickles?
