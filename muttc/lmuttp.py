@@ -17,6 +17,9 @@ f_out = sys.argv[0]
 with open(f_in,"r") as r_file:
     m_src = r_file.read()
 
+# create some room to close any open parentheses
+m_src += "\n"
+
 # last line indent level
 lind_lvl = 0
 # are we currently in a string
@@ -75,6 +78,10 @@ while(cursor<len(m_src)):
         start,finish,word = mutth.get_next_word(m_src,cursor)
         if word in simple_st:
             cursor = finish
+            m_src,_,lind_lvl,ind_delta = mutth.check_indents_add_brackets(m_src,start,lind_lvl)
+            start += ind_delta
+            finish += ind_delta
+            cursor += ind_delta
             m_src = mutth.insert_at(m_src,"(",cursor)
             # TODO: handle possible errors
             close_if = mutth.get_statement(m_src,cursor)
@@ -83,6 +90,10 @@ while(cursor<len(m_src)):
             cursor = close_if+1
         elif word == "else":
             cursor = finish
+            m_src,_,lind_lvl,ind_delta = mutth.check_indents_add_brackets(m_src,start,lind_lvl)
+            start += ind_delta
+            finish += ind_delta
+            cursor += ind_delta
             # TODO: handle possible errors
             close_if = mutth.get_statement(m_src,cursor)
             m_src = mutth.chop_at(m_src,close_if,close_if+1)
@@ -90,6 +101,10 @@ while(cursor<len(m_src)):
             m_src = mutth.insert_at(m_src,"{",close_if)
         elif word in ["case","default"]:
             cursor = finish
+            m_src,_,lind_lvl,ind_delta = mutth.check_indents_add_brackets(m_src,start,lind_lvl)
+            start += ind_delta
+            finish += ind_delta
+            cursor += ind_delta
             # TODO: handle possible errors
             close_if = mutth.get_statement(m_src,cursor)
             # cases have their own scope
@@ -98,7 +113,9 @@ while(cursor<len(m_src)):
             cursor = close_if+1
         elif word in ["var", "const"]:
             # TODO: add comments in this area
-            cursor = start
+            m_src,cursor,lind_lvl,ind_delta = mutth.check_indents_add_brackets(m_src,start,lind_lvl)
+            start = cursor
+            finish += ind_delta
             const = "const" if word.replace(" ","").replace("\t","") == "const" else ""
             def_p = mutth.get_var_declaration_end(m_src,finish)
             name_start,name_end,name = mutth.get_next_word(m_src,finish)
@@ -115,7 +132,9 @@ while(cursor<len(m_src)):
             cursor = mutth.get_semicolon(m_src,cursor)+1
             m_src = mutth.insert_at(m_src,";",cursor-1)
         elif word == "func":
-            cursor = start
+            m_src,cursor,lind_lvl,ind_delta = mutth.check_indents_add_brackets(m_src,start,lind_lvl)
+            start = cursor
+            finish += ind_delta
             m_src = mutth.chop_at(m_src,start,finish)
             name_start,name_end,name = mutth.get_next_word(m_src,cursor)
             # get the section of the function in parentheses
@@ -143,8 +162,10 @@ while(cursor<len(m_src)):
                 # refuse to compile
                 sys.exit(-1)
         else:
-            # FIXME: adds a semicolon to the end of the file. 
-            cursor = start
+            m_src,cursor,lind_lvl,ind_delta = mutth.check_indents_add_brackets(m_src,start,lind_lvl)
+            # last line is always len of 0
+            if (len(word) == 0):
+                break
             cursor = mutth.get_semicolon(m_src,cursor)+1
             m_src = mutth.insert_at(m_src,";",cursor-1)
     cursor += 1

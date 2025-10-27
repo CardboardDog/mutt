@@ -7,14 +7,14 @@ blah blah
 if
 "
 if stuff ":":
-	
+	pass
 while stuff ":":
-	
+	pass
 elif thing ":":
-
+	pass
 else:
+	pass
 
-	
 func hey(arg1:int, arg2:int) -> void:
 	return
 
@@ -26,12 +26,12 @@ func num2() -> int:
 
 switch thing:
 	case other_thing:
-
+		pass
 	case nothing:
 		while a:
 			dothing()
 	default:
-
+		pass
 
 var nothing:char* = d
 
@@ -48,3 +48,4 @@ var multiline_thing:type = ("
 
 if a:
 	pickles?
+

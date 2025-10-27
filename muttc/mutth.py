@@ -221,3 +221,24 @@ def get_function_end(m_src,cursor):
         print("function never ended are you missing an \":\"")
         #return
     return p_cursor
+
+def get_indent_count(src,cursor):
+    # FIXME: this currently ignores tabs inside strings
+    p_cursor = cursor
+    tab_count = 0
+    while(p_cursor<len(src)): 
+        char = src[p_cursor]
+        if(char == "\n"):
+            return tab_count
+        elif(char == "\t"):
+            tab_count += 1
+        p_cursor -= 1
+    return tab_count
+
+def check_indents_add_brackets(src,cursor,indents):
+    new_indents = get_indent_count(src,cursor)
+    indent_delta = 0-(new_indents-indents)
+    indent_delta = max(indent_delta,0)
+    new_source = insert_at(src,"\n}\n"*indent_delta,cursor)
+    cursor_delta = len(new_source)-len(src)
+    return (new_source,cursor+cursor_delta,new_indents,cursor_delta)
