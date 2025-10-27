@@ -18,6 +18,9 @@ else:
 func hey(arg1:int, arg2:int) -> void:
 	return
 
+func hey2(arg1:int, arg2:int) -> void void *:
+	return
+
 func num2() -> int:
 	return 3
 
