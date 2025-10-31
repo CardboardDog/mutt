@@ -2,6 +2,9 @@
 # documenting function would be good too
 
 # weird name but does what it says
+
+# FIXME: some of these functions may use negative indexes
+
 def is_notspace(string):
     return (string.isalpha() or string in ["_","[","]","*","\""] or string.isdigit()) and not string.isspace() # isspace might be redundant
 

@@ -49,3 +49,22 @@ var multiline_thing:type = ("
 if a:
 	pickles?
 
+if(true):
+	enum engine:
+		V6
+		V8
+		V12
+enum engine:
+	V6
+	V8
+	V12
+
+if(true):
+	object car:
+		var wheels: int
+		var engine_type: engine
+		var brand: char*
+object car:
+	var wheels: int
+	var engine_type: engine thing2
+	var brand: char*
