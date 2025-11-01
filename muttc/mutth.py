@@ -6,7 +6,7 @@
 # FIXME: some of these functions may use negative indexes
 
 def is_notspace(string):
-    return (string.isalpha() or string in ["_","[","]","*","\""] or string.isdigit()) and not string.isspace() # isspace might be redundant
+    return (string.isalpha() or string in ["_","[","]","*","\"","@"] or string.isdigit()) and not string.isspace() # isspace might be redundant
 
 def get_next_word(src,cursor):
     cursor_p = cursor
@@ -22,6 +22,21 @@ def get_next_word(src,cursor):
         cursor_p +=1
     word_f = cursor_p
     return (word_s,word_f,word)
+
+def get_previous_word(src,cursor):
+    cursor_p = cursor
+    word = ""
+    word_s = cursor
+    word_f = cursor
+    while(cursor_p>0 and not is_notspace(src[cursor_p])):
+        cursor_p -=1
+    word_s = cursor_p
+    while(cursor_p>0 and is_notspace(src[cursor_p])):
+        word = src[cursor_p]+word
+        cursor_p -=1
+    word_f = cursor_p
+    # swapped because we start at the end
+    return (word_f,word_s,word)
 
 def insert_at(string, thing, place):
     return string[:place] + thing + string[place:]

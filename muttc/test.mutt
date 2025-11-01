@@ -1,69 +1,27 @@
-blah blah
-
-""
-
-
-"
-if
-"
-if stuff ":":
-	pass
-while stuff ":":
-	pass
-elif thing ":":
-	pass
-else:
-	pass
-
-func hey(arg1:int, arg2:int) -> void:
-	return
-
-func hey2(arg1:int, arg2:int) -> void void *:
-	return
-
-func num2() -> int:
-	return 3
-
-switch thing:
-	case other_thing:
-		pass
-	case nothing:
-		while a:
-			dothing()
-	default:
-		pass
-
-var nothing:char* = d
-
-const thingx:type type type
-
-var thing2:type type type = s
-
-var multiline_thing:type = ("
-	hey "
-	data
-	"
-	"
-	)
-
-if a:
-	pickles?
-
 if(true):
-	enum engine:
+	deck engine:
 		V6
 		V8
 		V12
-enum engine:
+
+deck engine:
 	V6
 	V8
 	V12
+
+thing = {
+	hey,
+	b
+}
 
 if(true):
 	object car:
 		var wheels: int
 		var engine_type: engine
 		var brand: char*
+	if false :
+		pass
+
 object car:
 	var wheels: int
 	var engine_type: engine thing2
